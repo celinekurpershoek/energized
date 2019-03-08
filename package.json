@@ -7,7 +7,7 @@
     "test": "jest",
     "format": "prettier --write \"fem/**/*.{js,jsx}\"",
     "lint": "eslint \"fem/**/*.{js,jsx}\" --quiet",
-    "dev": "parcel fem/index.html"
+    "dev": "parcel src/index.html"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +17,7 @@
     "babel-eslint": "^8.2.6",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "eslint": "^5.14.1",
     "eslint-config-prettier": "^2.9.0",
@@ -27,6 +28,13 @@
     "prettier": "^1.14.2"
   },
   "dependencies": {
-    "firebase": "^5.8.4"
+    "@reach/router": "^1.1.1",
+    "firebase": "^5.8.4",
+    "moment": "^2.24.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3",
+    "react-moment": "^0.8.4",
+    "slugify": "^1.3.4"
   }
 }
