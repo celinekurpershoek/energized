@@ -1,31 +1,32 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import slugify from "slugify";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 
 import Header from "./components/header";
 import Graph from "./components/graph";
-import { db } from "../firebase";
+import { db } from "../firebase/index.js";
 
 const userId = "Q78a0FyTbsuTMEG9RtB4";
-
-import calculateDifference from "../lib/calculate-difference";
+type data = { date: string; value: number };
 
 class App extends React.Component {
-  constructor(props) {
+  state: { kwh: data[]; userInfo: { name: string }; startValue: number };
+
+  constructor(props: any) {
     super(props);
     this.state = {
       kwh: [],
-      userInfo: {},
+      userInfo: { name: "" },
       startValue: 9000
     };
     this.setUserData = this.setUserData.bind(this);
   }
+
   componentDidMount() {
-    this.getUserInfo();
+    this.setUserInfo();
     this.getUserData();
   }
 
-  getUserInfo() {
+  setUserInfo() {
     db.collection("users")
       .doc(userId)
       .get()
@@ -40,7 +41,7 @@ class App extends React.Component {
       });
   }
 
-  setUserData(event) {
+  setUserData(event: Event) {
     event.preventDefault();
     const data = this.getFormData(event);
     db.collection("kwh")
@@ -48,39 +49,38 @@ class App extends React.Component {
       .set({
         date: data.date,
         user: userId,
-        value: data.kwh
+        value: data.value
       })
       .then(function() {
         console.log("Document successfully written!");
       })
-      .catch(function(error) {
+      .catch(function(error: string) {
         console.error("Error writing document: ", error);
       });
   }
 
   getUserData() {
     db.collection("kwh")
-      .where("user", "==", "Q78a0FyTbsuTMEG9RtB4")
+      .where("user", "==", userId)
       .onSnapshot(querySnapshot => {
-        const kwh = [];
+        const kwh: data[] = [];
         querySnapshot.forEach(function(doc) {
-          const data = doc.data();
+          const documentData: { date: number; value: number } = doc.data();
           kwh.push({
-            date: new Date(data.date).toString(),
-            value: data.value
+            date: new Date(documentData.date).toString(),
+            value: documentData.value
           });
         });
         this.setState({ kwh: kwh });
-        console.log(this.state);
       });
   }
 
-  getFormData(event) {
-    const formData = new FormData(event.target);
-    const data = {};
+  getFormData(event: Event): data {
+    const formData = new FormData(event.target as HTMLFormElement);
+    const data: data = { date: 0, value: 0 };
     for (var pair of formData.entries()) {
       if (pair[0] === "kwh") {
-        data.kwh = pair[1];
+        data.value = pair[1];
       }
       if (pair[0] === "date") {
         data.date = pair[1];
@@ -93,7 +93,7 @@ class App extends React.Component {
     return (
       <div>
         <Header title={`Hello ${this.state.userInfo.name}`} />
-        <Graph startValue="9557" kwh={this.state.kwh} />
+        <Graph startValue={this.state.startValue} kwh={this.state.kwh} />
 
         <form onSubmit={this.setUserData}>
           <input

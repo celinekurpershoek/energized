@@ -18,24 +18,27 @@ class Graph extends React.Component {
       <div className="graphs">
         <h2>KWH increase</h2>
         <ul className="graph graph--vertical">
-          {this.props.kwh.map(data => {
+          {this.props.kwh.map(kwhEntry => {
             const graphData = getGraphData({
               oldValue: startValue,
-              newValue: data.value,
+              newValue: kwhEntry.value,
               stepSize
             });
-            startValue = data.value;
+            startValue = kwhEntry.value;
             return (
-              <li className="graph__entry" key={new Date(data.date).getTime()}>
+              <li
+                className="graph__entry"
+                key={new Date(kwhEntry.date).getTime()}
+              >
                 <GraphPipe
-                  startValue={graphData.startValue}
+                  startValue={startValue}
                   heightValue={graphData.heightValue}
                   difference={graphData.difference}
                   percentage={graphData.percentage}
                 />
 
                 <span className="graph__label">
-                  <Moment format="D MMM">{data.date}</Moment>
+                  <Moment format="D MMM">{kwhEntry.date}</Moment>
                 </span>
               </li>
             );

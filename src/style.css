@@ -6,8 +6,9 @@ body {
   font-family: Calibri, "Trebuchet MS", sans-serif;
   background: rgb(178, 234, 238);
 }
+
 .app-header {
-  background: #ccc;
+  background: rgba(255, 255, 255, 0.1);
   padding: 0.4rem 0.5rem;
   text-align: center;
 }
@@ -16,14 +17,20 @@ body {
   margin: 0;
 }
 
+.graphs {
+  background: white;
+  border-radius: 5px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  width: auto;
+}
+
 .graph {
   height: 250px;
   list-style: none;
   margin: 0;
   padding: 0;
-  background: white;
-  border-radius: 5px;
-  padding: 1rem;
 }
 
 .graph--vertical {

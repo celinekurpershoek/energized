@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "module": "esnext",
+    "jsx": "react"
+  },
+  "lib": ["dom", "dom.iterable"],
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}
