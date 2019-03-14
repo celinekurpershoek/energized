@@ -3,12 +3,18 @@ import Moment from "react-moment";
 import { GraphPipe } from "./GraphPipe";
 import getGraphData from "./getGraphData";
 
+// set a default scale for now need to calculate this eventually
 const graphMin = 9000;
 const graphMax = 20000;
 const stepSize = (graphMax - graphMin) / 100; // 1% = 110 557 = 5% 100% = 11000
 
-class Graph extends React.Component {
-  constructor(props) {
+interface IProps {
+  startValue: number;
+  kwh: [{ value: number; date: string }];
+}
+
+class Graph extends React.Component<IProps, any> {
+  constructor(props: IProps) {
     super(props);
   }
 

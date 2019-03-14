@@ -1,7 +1,9 @@
-import React from "react";
-
-class Header extends React.Component {
-  constructor(props) {
+import * as React from "react";
+interface IProps {
+  title: string;
+}
+class Header extends React.Component<IProps, any> {
+  constructor(props: IProps) {
     super(props);
   }
   render() {
