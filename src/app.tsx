@@ -3,7 +3,7 @@ import * as ReactDOM from "react-dom";
 
 import Header from "./components/header";
 import Graph from "./components/graph";
-import { db } from "../firebase/index.js";
+import { db } from "../firebase/index";
 
 const userId = "Q78a0FyTbsuTMEG9RtB4";
 type data = { date: string; value: number };
@@ -41,9 +41,9 @@ class App extends React.Component {
       });
   }
 
-  setUserData(event: Event) {
+  setUserData(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const data = this.getFormData(event);
+    const data = this.getFormData(event.target as HTMLFormElement);
     db.collection("kwh")
       .doc(data.date)
       .set({
@@ -51,10 +51,10 @@ class App extends React.Component {
         user: userId,
         value: data.value
       })
-      .then(function() {
+      .then(() => {
         console.log("Document successfully written!");
       })
-      .catch(function(error: string) {
+      .catch((error: string) => {
         console.error("Error writing document: ", error);
       });
   }
@@ -62,9 +62,9 @@ class App extends React.Component {
   getUserData() {
     db.collection("kwh")
       .where("user", "==", userId)
-      .onSnapshot(querySnapshot => {
+      .onSnapshot((querySnapshot: any) => {
         const kwh: data[] = [];
-        querySnapshot.forEach(function(doc) {
+        querySnapshot.forEach((doc: any) => {
           const documentData: { date: number; value: number } = doc.data();
           kwh.push({
             date: new Date(documentData.date).toString(),
@@ -75,9 +75,9 @@ class App extends React.Component {
       });
   }
 
-  getFormData(event: Event): data {
-    const formData = new FormData(event.target as HTMLFormElement);
-    const data: data = { date: 0, value: 0 };
+  getFormData(form: HTMLFormElement): data {
+    const formData = new FormData(form);
+    const data: data = null;
     for (var pair of formData.entries()) {
       if (pair[0] === "kwh") {
         data.value = pair[1];
