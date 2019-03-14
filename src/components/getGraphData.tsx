@@ -3,16 +3,18 @@ interface IProps {
   oldValue: number;
   stepSize: number;
 }
-
-function getGraphData(props: IProps) {
+/**
+ * Return object with data to display graph element
+ * @param props
+ */
+export default function getGraphData(props: IProps) {
   const { newValue, oldValue, stepSize } = props;
+  const numberToLowerGraph = 50;
   const difference = newValue - oldValue;
 
   return {
     difference,
     percentage: Math.round((difference / oldValue) * 100),
-    heightValue: oldValue / stepSize - 40
+    heightValue: oldValue / stepSize - numberToLowerGraph
   };
 }
-
-export default getGraphData;

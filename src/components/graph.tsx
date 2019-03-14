@@ -1,6 +1,6 @@
 import React from "react";
 import Moment from "react-moment";
-import { GraphPipe } from "./GraphPipe";
+import GraphPipe from "./GraphPipe";
 import getGraphData from "./getGraphData";
 
 // set a default scale for now need to calculate this eventually
