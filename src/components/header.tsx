@@ -2,7 +2,7 @@ import * as React from "react";
 interface IProps {
   title: string;
 }
-class Header extends React.Component<IProps, any> {
+export default class Header extends React.Component<IProps, any> {
   constructor(props: IProps) {
     super(props);
   }
@@ -14,5 +14,3 @@ class Header extends React.Component<IProps, any> {
     );
   }
 }
-
-export default Header;

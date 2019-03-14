@@ -5,13 +5,25 @@ import Header from "./components/header";
 import Graph from "./components/graph";
 import { db } from "../firebase/index";
 
+/**
+ * ????
+ * [] export default vs export
+ * [] interface gebruiken voor defineren props?
+ * [] form entries error
+ * [] render <App/> error
+ * [] move more files to own folder?
+ */
+
 const userId = "Q78a0FyTbsuTMEG9RtB4";
 type data = { date: string; value: number };
 
-class App extends React.Component {
-  state: { kwh: data[]; userInfo: { name: string }; startValue: number };
-
-  constructor(props: any) {
+interface StateProps {
+  kwh: data[];
+  userInfo: { name: string };
+  startValue: number;
+}
+class App extends React.Component<StateProps, any> {
+  constructor(props: StateProps) {
     super(props);
     this.state = {
       kwh: [],
