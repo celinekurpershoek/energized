@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import Moment from "react-moment";
 import GraphPipe from "./GraphPipe";
 import getGraphData from "./getGraphData";
@@ -10,7 +10,7 @@ const stepSize = (graphMax - graphMin) / 100; // 1% = 110 557 = 5% 100% = 11000
 
 interface IProps {
   startValue: number;
-  kwh: [{ value: number; date: string }];
+  kwh: Array<{ value: number; date: string }>;
 }
 
 class Graph extends React.Component<IProps, any> {
@@ -24,27 +24,24 @@ class Graph extends React.Component<IProps, any> {
       <div className="graphs">
         <h2>KWH increase</h2>
         <ul className="graph graph--vertical">
-          {this.props.kwh.map(kwhEntry => {
-            const graphData = getGraphData({
+          {this.props.kwh.map(({ value: kwhValue, date: kwhDate }) => {
+            const { heightValue, difference, percentage } = getGraphData({
               oldValue: startValue,
-              newValue: kwhEntry.value,
+              newValue: kwhValue,
               stepSize
             });
-            startValue = kwhEntry.value;
+            startValue = kwhValue;
             return (
-              <li
-                className="graph__entry"
-                key={new Date(kwhEntry.date).getTime()}
-              >
+              <li className="graph__entry" key={new Date(kwhDate).getTime()}>
                 <GraphPipe
                   startValue={startValue}
-                  heightValue={graphData.heightValue}
-                  difference={graphData.difference}
-                  percentage={graphData.percentage}
+                  heightValue={heightValue}
+                  difference={difference}
+                  percentage={percentage}
                 />
 
                 <span className="graph__label">
-                  <Moment format="D MMM">{kwhEntry.date}</Moment>
+                  <Moment format="D MMM">{kwhDate}</Moment>
                 </span>
               </li>
             );

@@ -8,22 +8,20 @@ import { db } from "../firebase/index";
 /**
  * ????
  * [] export default vs export
- * [] interface gebruiken voor defineren props?
  * [] form entries error
- * [] render <App/> error
- * [] move more files to own folder?
+ * [] move more function to own file?
  */
 
 const userId = "Q78a0FyTbsuTMEG9RtB4";
-type data = { date: string; value: number };
+type kwhData = { date: string; value: number };
 
-interface StateProps {
-  kwh: data[];
+interface IState {
+  kwh: Array<kwhData>;
   userInfo: { name: string };
   startValue: number;
 }
-class App extends React.Component<StateProps, any> {
-  constructor(props: StateProps) {
+class App extends React.Component<any, IState> {
+  constructor(props: any) {
     super(props);
     this.state = {
       kwh: [],
@@ -42,7 +40,7 @@ class App extends React.Component<StateProps, any> {
     db.collection("users")
       .doc(userId)
       .get()
-      .then(doc => {
+      .then((doc: any) => {
         const userData = doc.data();
         this.setState({
           userInfo: {
@@ -55,13 +53,13 @@ class App extends React.Component<StateProps, any> {
 
   setUserData(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const data = this.getFormData(event.target as HTMLFormElement);
+    const kwhData = this.getFormData(event.target as HTMLFormElement);
     db.collection("kwh")
-      .doc(data.date)
+      .doc(kwhData.date)
       .set({
-        date: data.date,
+        date: kwhData.date,
         user: userId,
-        value: data.value
+        value: kwhData.value
       })
       .then(() => {
         console.log("Document successfully written!");
@@ -75,21 +73,21 @@ class App extends React.Component<StateProps, any> {
     db.collection("kwh")
       .where("user", "==", userId)
       .onSnapshot((querySnapshot: any) => {
-        const kwh: data[] = [];
+        const kwh: kwhData[] = [];
         querySnapshot.forEach((doc: any) => {
-          const documentData: { date: number; value: number } = doc.data();
+          const docData: kwhData = doc.data();
           kwh.push({
-            date: new Date(documentData.date).toString(),
-            value: documentData.value
+            date: new Date(docData.date).toString(),
+            value: docData.value
           });
         });
         this.setState({ kwh: kwh });
       });
   }
 
-  getFormData(form: HTMLFormElement): data {
+  getFormData(form: HTMLFormElement): kwhData {
     const formData = new FormData(form);
-    const data: data = null;
+    const data: kwhData = null;
     for (var pair of formData.entries()) {
       if (pair[0] === "kwh") {
         data.value = pair[1];
@@ -102,10 +100,11 @@ class App extends React.Component<StateProps, any> {
   }
 
   render() {
+    const { kwh, startValue } = this.state;
     return (
       <div>
         <Header title={`Hello ${this.state.userInfo.name}`} />
-        <Graph startValue={this.state.startValue} kwh={this.state.kwh} />
+        <Graph startValue={startValue} kwh={kwh} />
 
         <form onSubmit={this.setUserData}>
           <input
