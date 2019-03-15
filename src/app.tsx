@@ -86,17 +86,10 @@ class App extends React.Component<any, IState> {
   }
 
   getFormData(form: HTMLFormElement): kwhData {
-    const formData = new FormData(form);
-    const data: kwhData = null;
-    for (var pair of formData.entries()) {
-      if (pair[0] === "kwh") {
-        data.value = pair[1];
-      }
-      if (pair[0] === "date") {
-        data.date = pair[1];
-      }
-    }
-    return data;
+    const kwh = form.elements.namedItem("kwh").value;
+    const date = form.elements.namedItem("date").value || new Date().toString();
+
+    return { date, value: kwh };
   }
 
   render() {

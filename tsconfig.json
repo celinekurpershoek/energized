@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "es2015",
     "jsx": "react"
   },
   "lib": ["dom", "dom.iterable", "esnext"],
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "include": ["src/**/*", "__tests__/differenceBlock.test.js"],
+  "exclude": ["node_modules", "**/*.spec.ts", "src/components/*.test.js"]
 }
