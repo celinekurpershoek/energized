@@ -5,13 +5,6 @@ import Header from "./components/header";
 import Graph from "./components/graph";
 import { db } from "../firebase/index";
 
-/**
- * ????
- * [] export default vs export
- * [] form entries error
- * [] move more function to own file?
- */
-
 const userId = "Q78a0FyTbsuTMEG9RtB4";
 type kwhData = { date: string; value: number };
 
@@ -53,7 +46,7 @@ class App extends React.Component<any, IState> {
 
   setUserData(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const kwhData = this.getFormData(event.target as HTMLFormElement);
+    const kwhData: kwhData = this.getFormData(event.target as HTMLFormElement);
     db.collection("kwh")
       .doc(kwhData.date)
       .set({
@@ -86,9 +79,14 @@ class App extends React.Component<any, IState> {
   }
 
   getFormData(form: HTMLFormElement): kwhData {
-    const kwh = form.elements.namedItem("kwh").value;
-    const date = form.elements.namedItem("date").value || new Date().toString();
-
+    const kwhInput: HTMLInputElement = form.elements.namedItem(
+      "kwh"
+    ) as HTMLInputElement;
+    const dateInput: HTMLInputElement = form.elements.namedItem(
+      "date"
+    ) as HTMLInputElement;
+    const date: string = dateInput.value || new Date().toString();
+    const kwh: number = parseInt(kwhInput.value);
     return { date, value: kwh };
   }
 
