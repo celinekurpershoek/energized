@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import GraphPipe from "../src/components/GraphPipe";
+import GraphPipe from "../src/components/graphPipe";
 
 it("Correctly render GraphPipe component", () => {
   const component = renderer.create(
