@@ -22,7 +22,7 @@ export default function getGraphData(props: IProps) {
 
   return {
     difference,
-    percentage: getPercentage(difference, oldValue),
+    percentage: getPercentage(difference, oldValue) || 0,
     heightValue: oldValue / stepSize - numberToLowerGraph
   };
 }
@@ -36,7 +36,7 @@ export function getPercentage(difference: number, oldValue: number) {
     percentage = 100;
   }
   if (percentage > 300) {
-    throw "The percentage is above 300, something is wrong?";
+    console.info("The percentage is above 300, something is wrong?");
   }
   return percentage;
 }

@@ -30,12 +30,6 @@ test("Let percentage be 0 when values are below 0", () => {
   expect(getPercentage(-50, -0)).toEqual(0);
 });
 
-test("Throw error when difference more then 300% of old value", () => {
-  expect(() => getPercentage(301, 100)).toThrow(
-    "The percentage is above 300, something is wrong?"
-  );
-});
-
 test("50 of 100 === 50%", () => {
   expect(getPercentage(50, 100)).toEqual(50);
 });
