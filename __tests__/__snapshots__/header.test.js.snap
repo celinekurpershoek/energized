@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Correctly render header component 1`] = `
+<header
+  className="app-header"
+>
+  <h1>
+    Hello test
+  </h1>
+</header>
+`;

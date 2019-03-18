@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Correctly render GraphPipe component 1`] = `
+<div
+  className="graph__pipes"
+>
+  <span
+    className="graph__pipe graph__pipe--vertical"
+    style={
+      Object {
+        "height": "10%",
+      }
+    }
+    title="0 KWH"
+  />
+  <span
+    className="graph__pipe graph__pipe--vertical graph__pipe--difference"
+    style={
+      Object {
+        "height": "50%",
+      }
+    }
+    title="5KWH (+50%)"
+  />
+</div>
+`;
