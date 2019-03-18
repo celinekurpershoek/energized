@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Correctly render header component 1`] = `
+exports[`Correctly render differenceBlock component 1`] = `
 <span
   className="graph__pipe graph__pipe--vertical graph__pipe--difference"
   style={

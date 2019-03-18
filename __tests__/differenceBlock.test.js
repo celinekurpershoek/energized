@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import DifferenceBlock from "../src/components/differenceBlock";
 
-it("Correctly render header component", () => {
+it("Correctly render differenceBlock component", () => {
   const component = renderer.create(
     <DifferenceBlock difference="10" percentage="50" />
   );
