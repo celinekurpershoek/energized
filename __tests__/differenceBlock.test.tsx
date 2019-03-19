@@ -4,7 +4,7 @@ import DifferenceBlock from "../src/components/differenceBlock";
 
 it("Correctly render differenceBlock component", () => {
   const component = renderer.create(
-    <DifferenceBlock difference="10" percentage="50" />
+    <DifferenceBlock difference={10} percentage={50} />
   );
   let tree = component.toJSON();
   expect(tree).toMatchSnapshot();

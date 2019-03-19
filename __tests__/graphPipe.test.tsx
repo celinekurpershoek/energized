@@ -4,7 +4,7 @@ import GraphPipe from "../src/components/graphPipe";
 
 it("Correctly render GraphPipe component", () => {
   const component = renderer.create(
-    <GraphPipe startValue="0" heightValue="10" difference="5" percentage="50" />
+    <GraphPipe startValue={0} heightValue={10} difference={5} percentage={50} />
   );
   let tree = component.toJSON();
   expect(tree).toMatchSnapshot();
