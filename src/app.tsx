@@ -8,18 +8,20 @@ import { db } from "../firebase/index";
 const userId = "Q78a0FyTbsuTMEG9RtB4";
 type kwhData = { date: string; value: number };
 
-interface IState {
+type IState = {
   kwh: Array<kwhData>;
   userInfo: { name: string };
   startValue: number;
-}
+  usage: number;
+};
 class App extends React.Component<any, IState> {
   constructor(props: any) {
     super(props);
     this.state = {
       kwh: [],
       userInfo: { name: "" },
-      startValue: 9000
+      startValue: 9000,
+      usage: 0
     };
     this.setUserData = this.setUserData.bind(this);
   }
@@ -91,11 +93,11 @@ class App extends React.Component<any, IState> {
   }
 
   render() {
-    const { kwh, startValue } = this.state;
+    const { kwh, startValue, usage } = this.state;
     return (
       <div>
         <Header title={`Hello ${this.state.userInfo.name}`} />
-        <Graph startValue={startValue} kwh={kwh} />
+        <Graph usage={usage} startValue={startValue} kwh={kwh} />
 
         <form onSubmit={this.setUserData}>
           <input
