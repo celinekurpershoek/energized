@@ -34,11 +34,9 @@ class Graph extends React.Component<IProps, any> {
   calculateUsage() {
     const kwhArray = this.props.kwh;
     const kwhLatest = kwhArray[kwhArray.length - 1];
-    console.log(kwhArray[kwhArray.length - 1]);
     if (!kwhLatest) {
       return;
     }
-    console.log(kwhLatest.value);
     Graph.usage = Graph.startValue - kwhLatest.value;
   }
 
