@@ -13,7 +13,8 @@
     "test:watch": "jest --watch",
     "tsc": "./node_modules/typescript/bin/tsc",
     "type-check": "tsc --noEmit",
-    "type-check:watch": "tsc --noEmit --watch"
+    "type-check:watch": "tsc --noEmit --watch",
+    "production": "parcel build src/index.html && jest --ci && codecov"
   },
   "husky": {
     "hooks": {
@@ -48,6 +49,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+  },
+  "dependencies": {
+    "codecov": "^3.2.0",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "firebase": "^5.8.4",
+    "react-moment": "^0.8.4",
     "@babel/types": "^7.3.4",
     "@types/jest": "^24.0.11",
     "@types/react": "^16.8.7",
@@ -73,11 +81,5 @@
     "tslint-config-prettier": "^1.18.0",
     "tslint-react": "^3.6.0",
     "typescript": "^3.3.3333"
-  },
-  "dependencies": {
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4",
-    "firebase": "^5.8.4",
-    "react-moment": "^0.8.4"
   }
 }
