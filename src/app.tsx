@@ -57,7 +57,7 @@ class App extends React.Component<any, IState> {
         value: kwhData.value
       })
       .then(() => {
-        console.log("Document successfully written!");
+        console.info("Document successfully written!");
       })
       .catch((error: string) => {
         console.error("Error writing document: ", error);
